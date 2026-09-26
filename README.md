@@ -198,3 +198,74 @@ Rapor görüntüleme:
 ```bash
 npm run report
 ```
+## API Test Automation
+
+Projede UI testlerine ek olarak fatura işlemleri için mock API ve BDD tabanlı API testleri bulunmaktadır.
+
+### Mock API Endpointleri
+
+- `POST /token`
+  - `user` ve `pass` header bilgilerini alır.
+  - Başarılı istekte token döndürür.
+
+- `GET /viewInvoice?barcode={barcode}`
+  - Barkod bilgisi query parametresi olarak gönderilir.
+  - Başarılı istekte fatura linki ve işlem sonucu döndürülür.
+
+- `POST /sendInvoice`
+  - Token header içerisinde gönderilir.
+  - Barkod request body içerisinde gönderilir.
+
+Request body:
+
+```json
+{
+  "Barcode": "123456789"
+}
+```
+
+### Mock Server'ı Çalıştırma
+
+Mock server'ı başlatmak için:
+
+```bash
+npm run mock-server
+```
+
+Server aşağıdaki adreste çalışır:
+
+```text
+http://localhost:3000
+```
+
+### API Testini Çalıştırma
+
+Mock server çalışırken farklı bir terminalde:
+
+```bash
+npm run test:api
+```
+
+### API Response Dosyaları
+
+Başarılı `viewInvoice` ve `sendInvoice` çağrılarının response body'leri aşağıdaki dosyalara yazılır:
+
+```text
+api-responses/
+    viewInvoice-response.json
+    sendInvoice-response.json
+```
+
+API test akışı:
+
+```text
+Token al
+   ↓
+viewInvoice çağrısı
+   ↓
+Response doğrulama ve dosyaya yazma
+   ↓
+sendInvoice çağrısı
+   ↓
+Response doğrulama ve dosyaya yazma
+```

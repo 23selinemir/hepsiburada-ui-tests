@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-"scripts": {
+  "scripts": {
   "test": "playwright test",
   "test:chromium": "playwright test --project=chromium",
   "test:firefox": "playwright test --project=firefox",
   "test:webkit": "playwright test --project=webkit",
+  "test:api": "playwright test --grep \"Fatura görüntüleme ve gönderme işlemlerinin başarılı olması\" --project=chromium",
+  "mock-server": "tsx mock-server/server.ts",
   "report": "playwright show-report"
 },
   "keywords": [],
@@ -16,12 +18,14 @@
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.63.0",
+    "@types/express": "^5.0.6",
     "@types/node": "^26.6.3",
     "playwright-bdd": "^9.2.1",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "dotenv": "^18.0.4"
+    "dotenv": "^18.0.4",
+    "express": "^5.2.1"
   }
 }
